@@ -1,8 +1,8 @@
 version: '2'
 
-# la xarxa 1 farà servir les adreces 72.28.1.0/16
-# la xarxa 2 farà servir les adreces 42.28.1.0/16
-# la xarxa 3 farà servir les adreces 12.28.1.0/16
+# la xarxa 1 farà servir les adreces 10.20.1.0/16
+# la xarxa 2 farà servir les adreces 20.30.1.0/16
+# la xarxa 3 farà servir les adreces 30.40.1.0/16
  
 
 services:
@@ -18,7 +18,7 @@ services:
       - SYS_ADMIN
     networks:
       x2:
-        ipv4_address: 42.28.1.101
+        ipv4_address: 20.30.1.101
 
   dhcpclientx3:
     image: joaniznardo/ubuntum7base
@@ -31,7 +31,7 @@ services:
       - SYS_ADMIN
     networks:
       x3:
-        ipv4_address: 12.28.1.101
+        ipv4_address: 10.20.1.101
 
   dhcpclientx1:
     image: joaniznardo/ubuntum7base
@@ -44,7 +44,7 @@ services:
       - SYS_ADMIN
     networks:
       x1:
-        ipv4_address: 72.28.1.101
+        ipv4_address: 30.40.1.101
 
   dhcpserver:
     image: joaniznardo/ubuntum7dhcp1
@@ -54,7 +54,7 @@ services:
     container_name: dhcpserver
     networks:
       x1:
-        ipv4_address: 72.28.1.100
+        ipv4_address: 30.40.1.100
   
   dhcprelayx2:
     image: joaniznardo/ubuntum7dhcp1
@@ -64,9 +64,9 @@ services:
     container_name: dhcprelayx2
     networks:
       x1:
-        ipv4_address: 72.28.1.99 
+        ipv4_address: 30.40.1.99 
       x2:
-        ipv4_address: 42.28.1.100
+        ipv4_address: 20.30.1.100
   
   dhcprelayx3:
     image: joaniznardo/ubuntum7dhcp1
@@ -76,42 +76,42 @@ services:
     container_name: dhcprelayx3
     networks:
       x1:
-        ipv4_address: 72.28.1.98 
+        ipv4_address: 30.40.1.98 
       x3:
-        ipv4_address: 12.28.1.100
+        ipv4_address: 10.20.1.100
   
 networks:
   x1:
     ipam:
       driver: default
       config:
-        - subnet: 72.28.0.0/16
-          ip_range: 72.28.1.0/30
-          gateway: 72.28.1.1
+        - subnet: 30.40.0.0/16
+          ip_range: 30.40.1.0/30
+          gateway: 30.40.1.1
           aux_addresses:
-            host1: 72.28.1.2
-            host2: 72.28.1.3
-            host0: 72.28.1.0
+            host1: 30.40.1.2
+            host2: 30.40.1.3
+            host0: 30.40.1.0
 
   x2:
     ipam:
       driver: default
       config:
-        - subnet: 42.28.0.0/16
-          ip_range: 42.28.1.0/30
-          gateway: 42.28.1.1
+        - subnet: 20.30.0.0/16
+          ip_range: 20.30.1.0/30
+          gateway: 20.30.1.1
           aux_addresses:
-            host1: 42.28.1.2
-            host2: 42.28.1.3
-            host0: 42.28.1.0
+            host1: 20.30.1.2
+            host2: 20.30.1.3
+            host0: 20.30.1.0
   x3:
     ipam:
       driver: default
       config:
-        - subnet: 12.28.0.0/16
-          ip_range: 12.28.1.0/30
-          gateway: 12.28.1.1
+        - subnet: 10.20.0.0/16
+          ip_range: 10.20.1.0/30
+          gateway: 10.20.1.1
           aux_addresses:
-            host1: 12.28.1.2
-            host2: 12.28.1.3
-            host0: 12.28.1.0
+            host1: 10.20.1.2
+            host2: 10.20.1.3
+            #~ host0: 10.20.1.0

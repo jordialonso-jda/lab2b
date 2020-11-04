@@ -2,7 +2,7 @@
 user=root
 
 # indiquem en quina interfície (ip) escoltem peticions de dhcp i les enviem a la ip del servidor 
-dhcp-relay=12.28.1.100,72.28.1.100
+dhcp-relay=10.20.1.100,30.40.1.100
 
 # deshabilitar el servidor dns de dnsmasq
 port=0
